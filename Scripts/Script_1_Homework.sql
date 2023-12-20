@@ -47,10 +47,18 @@ WHERE last_name LIKE '%es';
 
 --9. How many payment amounts (4.99, 5.99, etc.) had a number of rentals above 250 for customers
 --with ids between 380 and 430? (use group by and having > 250)
-SELECT customer_id, count(amount)
+SELECT customer_id, amount, count(amount)
 FROM payment 
-GROUP BY customer_id 
-
+WHERE customer_id >= 380 AND customer_id <=430 
+GROUP BY customer_id, amount
+HAVING count(amount) > 250;
 
 --10. Within the film table, how many rating categories are there? And what rating has the most
 --movies total?
+
+SELECT DISTINCT rating, count(title)
+FROM film
+GROUP BY rating
+ORDER BY count(title)DESC;
+
+
